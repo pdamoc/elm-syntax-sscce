@@ -243,6 +243,8 @@ update msg ({ count } as model) =
 -- VIEW
 
 
+{-| Shows how to declare a String that spans multiple lines
+-}
 multiline : String
 multiline =
     """
@@ -251,14 +253,26 @@ multiline =
 """
 
 
+{-| Shows how to define a tuple.
+-}
+initials : ( Char, Char )
+initials =
+    -- Show how to declare a Char type.
+    ( 'J', 'D' )
+
+
 view : Model -> Html Msg
 view model =
     let
         namedCount =
             -- Shows how to access a field from a record by using a field accessor function
             .namedCount model
+
+        -- Shows how to pattern match a tuple
+        ( first, last ) =
+            initials
     in
-    div []
+    main_ []
         [ button [ onClick Increment ] [ text "+1" ]
 
         -- Shows how to avoid parentheses by using the backwards pipe operator
@@ -270,6 +284,7 @@ view model =
         , String.lines multiline
             |> List.map (\line -> p [] [ text line ])
             |> div []
+        , footer [] [ text (String.fromChar first), text (String.fromChar last) ]
         ]
 
 
@@ -316,6 +331,9 @@ subscriptions model =
 -- WIRING
 
 
+{-| Signature for Browser.element is Program flags model msg.
+The flags type argument here is the Unit type: ()
+-}
 main : Program () Model Msg
 main =
     Browser.element
