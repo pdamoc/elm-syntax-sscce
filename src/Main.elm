@@ -13,6 +13,10 @@ port module Main exposing (Msg(..), Natural, main)
 import Browser
 import Html exposing (Html, button, div, text)
 import Html.Events as Events exposing (onClick)
+import Math.Matrix4
+import Math.Vector2
+import Math.Vector3
+import WebGL
 
 
 
@@ -317,3 +321,25 @@ port reportError : String -> Cmd msg
 The first parameter is a function that takes the data received from JS and produces a message that the app understands.
 -}
 port fromJS : (List String -> msg) -> Sub msg
+
+
+
+-- ADVANCED SYNTAX
+
+
+{-| Elm also has special syntax for declaring WebGL shaders. See more about this at: <https://github.com/elm-explorations/webgl/>
+-}
+vertexShader : WebGL.Shader { a | coord : Math.Vector3.Vec3, position : Math.Vector3.Vec3 } { b | view : Math.Matrix4.Mat4 } { vcoord : Math.Vector2.Vec2 }
+vertexShader =
+    [glsl|
+
+attribute vec3 position;
+attribute vec3 coord;
+uniform   mat4 view;
+varying   vec2 vcoord;
+
+void main () {
+  gl_Position = view * vec4(position, 1.0);
+  vcoord = coord.xy;
+}
+|]
