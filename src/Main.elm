@@ -91,7 +91,59 @@ namedNaturalToHtml namedValue =
         ]
 
 
+{-| Shows how to create a phantom type
+-}
+type Unit a
+    = Unit Int
 
+
+{-| When adding two units, the type parameter must be the same.
+-}
+addUnit : Unit a -> Unit a -> Unit a
+addUnit (Unit first) (Unit second) =
+    Unit (first + second)
+
+
+{-| A type to be used with the above Unit type
+-}
+type Meter
+    = Meter
+
+
+{-| A second type to be used with the above Unit type
+-}
+type Gram
+    = Gram
+
+
+twoMeters : Unit Meter
+twoMeters =
+    Unit 2
+
+
+threeMeters : Unit Meter
+threeMeters =
+    Unit 3
+
+
+fewGrams : Unit Gram
+fewGrams =
+    Unit 21
+
+
+someMeters : Unit Meter
+someMeters =
+    -- This works because the two units match
+    addUnit twoMeters threeMeters
+
+
+
+{- This value will throw an error if uncommented
+   impossibleAdd : Unit Meter
+   impossibleAdd =
+       -- This doesn't work because the types don't match
+       addUnit fewGrams someMeters
+-}
 -- MODEL
 
 
