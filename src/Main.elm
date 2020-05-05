@@ -9,13 +9,14 @@ port module Main exposing (Msg(..), Natural, main)
 -}
 
 -- Shows how to create an alias for a module name (Events)
+-- Shows how to import multiple modules into a single namespace (Math).
 
 import Browser
 import Html exposing (Html, button, div, text)
 import Html.Events as Events exposing (onClick)
-import Math.Matrix4
-import Math.Vector2
-import Math.Vector3
+import Math.Matrix4 as Math
+import Math.Vector2 as Math
+import Math.Vector3 as Math
 import WebGL
 
 
@@ -243,6 +244,11 @@ update msg ({ count } as model) =
 
 view : Model -> Html Msg
 view model =
+    let
+        namedCount =
+            -- Shows how to access a field from a record by using a field accessor function
+            .namedCount model
+    in
     div []
         [ button [ onClick Increment ] [ text "+1" ]
 
@@ -251,7 +257,7 @@ view model =
 
         -- Shows how to used a function from a module without having to expose it in the import section.
         , button [ Events.onClick Decrement ] [ text "-1" ]
-        , div [] [ namedNaturalToHtml model.namedCount ]
+        , div [] [ namedNaturalToHtml namedCount ]
         ]
 
 
@@ -329,7 +335,7 @@ port fromJS : (List String -> msg) -> Sub msg
 
 {-| Elm also has special syntax for declaring WebGL shaders. See more about this at: <https://github.com/elm-explorations/webgl/>
 -}
-vertexShader : WebGL.Shader { a | coord : Math.Vector3.Vec3, position : Math.Vector3.Vec3 } { b | view : Math.Matrix4.Mat4 } { vcoord : Math.Vector2.Vec2 }
+vertexShader : WebGL.Shader { a | coord : Math.Vec3, position : Math.Vec3 } { b | view : Math.Mat4 } { vcoord : Math.Vec2 }
 vertexShader =
     [glsl|
 
