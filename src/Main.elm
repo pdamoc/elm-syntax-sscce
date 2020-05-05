@@ -8,9 +8,9 @@ port module Main exposing (Msg(..), Natural, main)
 
 -}
 
--- Shows how to import everthing from a module (Html)
+-- Shows how to import everthing from a module (Html). It is recommended to avoid this syntax.
 -- Shows how to create an alias for a module name (Events)
--- Shows how to import multiple modules into a single namespace (Math).
+-- Shows how to import multiple modules into a single namespace (Math). Use this with great care as it can create confusion about the source of a function.
 
 import Browser
 import Html exposing (..)
