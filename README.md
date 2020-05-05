@@ -2,7 +2,7 @@
 
 This project started as a playful attempt to implement a short example that covers the entire Elm syntax. 
 
-The current version runs in [this Ellie](https://ellie-app.com/8Mm8KfDvxxna1).
+The current version runs in [this Ellie](https://ellie-app.com/8Mmqh7pGPxta1).
 
 The phantom types and WebGL Shader language examples are dead code (code that isn't used inside the app).
 

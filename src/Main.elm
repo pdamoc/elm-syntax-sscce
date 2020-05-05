@@ -211,6 +211,17 @@ update msg ({ count } as model) =
                 newValue : Natural
                 newValue =
                     addInt count -1
+
+                -- this is how to use the Debug.log to check for a value
+                _ =
+                    Debug.log "newValue" newValue
+
+                -- this shows that you can declare multiple _ values without the compiler complaining.
+                -- attempting to use a named declaration multiple times will result in a compiler error
+                _ =
+                    newValue
+                        -- adding the next line at the end of a declaration with result in it being logged to the JS console
+                        |> Debug.log "newValue"
             in
             if newValue == count then
                 -- Shows how to call a port
