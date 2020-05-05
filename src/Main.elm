@@ -8,11 +8,12 @@ port module Main exposing (Msg(..), Natural, main)
 
 -}
 
+-- Shows how to import everthing from a module (Html)
 -- Shows how to create an alias for a module name (Events)
 -- Shows how to import multiple modules into a single namespace (Math).
 
 import Browser
-import Html exposing (Html, button, div, text)
+import Html exposing (..)
 import Html.Events as Events exposing (onClick)
 import Math.Matrix4 as Math
 import Math.Vector2 as Math
@@ -242,6 +243,14 @@ update msg ({ count } as model) =
 -- VIEW
 
 
+multiline : String
+multiline =
+    """
+    This is a multiline string. 
+    It will be displayed by spliting the lines into separate paragraphs. 
+"""
+
+
 view : Model -> Html Msg
 view model =
     let
@@ -258,6 +267,9 @@ view model =
         -- Shows how to used a function from a module without having to expose it in the import section.
         , button [ Events.onClick Decrement ] [ text "-1" ]
         , div [] [ namedNaturalToHtml namedCount ]
+        , String.lines multiline
+            |> List.map (\line -> p [] [ text line ])
+            |> div []
         ]
 
 
