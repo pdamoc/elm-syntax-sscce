@@ -271,6 +271,14 @@ view model =
         -- Shows how to pattern match a tuple
         ( first, last ) =
             initials
+
+        -- a helper function
+        named value =
+            { name = value }
+
+        -- shows that record field accessors work on expressions too
+        nameFromExpression =
+            (named "Foo").name
     in
     main_ []
         [ button [ onClick Increment ] [ text "+1" ]
