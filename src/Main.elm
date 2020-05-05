@@ -63,6 +63,34 @@ addInt natural intValue =
     fromInt (value + intValue)
 
 
+{-| Shows how to create a type alias for a type that extends records. This alias will extend any other record with the field `name`.
+-}
+type alias Named a =
+    { a | name : String }
+
+
+{-| Shows how to use the above type alias.
+-}
+type alias NamedValue a =
+    Named { value : a }
+
+
+{-| Shows how to use the values from an extensible record alias fields
+-}
+namedToHtml : Named a -> Html msg
+namedToHtml { name } =
+    text name
+
+
+namedNaturalToHtml : NamedValue Natural -> Html msg
+namedNaturalToHtml namedValue =
+    div []
+        [ namedToHtml namedValue
+        , text ": "
+        , text (toString namedValue.value)
+        ]
+
+
 
 -- MODEL
 
@@ -70,14 +98,21 @@ addInt natural intValue =
 {-| Shows how to tie a name to a record type.
 -}
 type alias Model =
-    { count : Natural }
+    { count : Natural
+    , namedCount : NamedValue Natural
+    }
 
 
 {-| Shows how to ignore a parameter you are not using
 This purposefully shows a function without a type signature although top level functions and values should have type signatures.
 -}
 init _ =
-    ( { count = Natural 0 }, Cmd.none )
+    ( { count = Natural 0
+      , namedCount =
+            { name = "Natural", value = Natural 0 }
+      }
+    , Cmd.none
+    )
 
 
 
@@ -160,6 +195,7 @@ view model =
 
         -- Shows how to used a function from a module without having to expose it in the import section.
         , button [ Events.onClick Decrement ] [ text "-1" ]
+        , div [] [ namedNaturalToHtml model.namedCount ]
         ]
 
 
