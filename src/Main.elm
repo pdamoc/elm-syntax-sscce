@@ -188,6 +188,7 @@ type alias Naturals =
 type Msg
     = Increment
     | Decrement
+    | AddNextTen
     | OnSubscription (Result String Naturals)
 
 
@@ -229,6 +230,28 @@ update msg ({ count } as model) =
 
             else
                 ( { model | count = newValue }, Cmd.none )
+
+        AddNextTen ->
+            let
+                addIntToCount =
+                    -- Shows how to partially apply a function.
+                    -- This is very useful in scopes where the first arguments stay the same
+                    addInt count
+
+                intCount =
+                    toInt count
+
+                addTen =
+                    -- Shows how to use an infix operator as a prefix function.
+                    -- This is useful when you want to partially apply the operator and use
+                    -- the resulting function in a higher order function.
+                    (+) 10
+
+                nextTen =
+                    -- Shows how to use an infix operator as an argument in a higher order function.
+                    List.foldl (+) 0 (List.range intCount (addTen intCount))
+            in
+            ( { model | count = addIntToCount nextTen }, Cmd.none )
 
         -- Shows how to unpack a variant by matching against the contained variants
         OnSubscription (Ok naturals) ->
@@ -298,7 +321,8 @@ view model =
         , div [] [ text <| toString model.count ]
 
         -- Shows how to used a function from a module without having to expose it in the import section.
-        , button [ Events.onClick Decrement ] [ text "-1" ]
+        , div [] [ button [ Events.onClick Decrement ] [ text "-1" ] ]
+        , button [ onClick AddNextTen ] [ text "Add Next Ten" ]
         , div [] [ namedNaturalToHtml namedCount ]
         , String.lines multiline
             |> List.map (\line -> p [] [ text line ])
