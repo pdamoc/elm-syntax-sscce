@@ -69,6 +69,13 @@ addInt natural intValue =
     fromInt (value + intValue)
 
 
+{-| Adds 42 (the value is an Int written with HEX notation).
+-}
+addMeaning : Natural -> Natural
+addMeaning (Natural value) =
+    fromInt (value + 0x2A)
+
+
 {-| Shows how to create a type alias for a type that extends records. This alias will extend any other record with the field `name`.
 -}
 type alias Named a =
