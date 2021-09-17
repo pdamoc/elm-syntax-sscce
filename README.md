@@ -10,13 +10,8 @@ For a working example of WebGL Shader language see the [elm-explorations/webgl e
 
 ## Running the example localy
 
-The repository uses `parcel` as a build manager. The JS code is in [src/app.js](src/app.js). 
 
     npm install 
     npm start 
 
-## Warnings 
-
-It could be useful to look at the warnings that [elm-analyse](https://github.com/stil4m/elm-analyse) produces on this example. 
-
-There are some recommendations against using some of the patterns presented here (e.g. import all from module). Most of the warnings are for unused code. 
+ 

@@ -4,7 +4,7 @@
   "description": "A Short, Self Contained, Correct (Compilable), Example for the entire Elm syntax.",
   "main": "index.js",
   "scripts": {
-    "start": "parcel src/index.html",
+    "start": "elm-live src/Main.elm --open -- --output=main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,10 +21,7 @@
   },
   "homepage": "https://github.com/pdamoc/elm-syntax-sscce#readme",
   "devDependencies": {
-    "@parcel/transformer-elm": "^2.0.0-rc.0",
     "elm": "^0.19.1-5",
-    "elm-hot": "^1.1.6",
-    "node-elm-compiler": "^5.0.6",
-    "parcel": "^2.0.0-rc.0"
+    "elm-live": "^4.0.0-rc.1"
   }
 }
