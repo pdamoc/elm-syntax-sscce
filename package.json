@@ -22,6 +22,6 @@
   "homepage": "https://github.com/pdamoc/elm-syntax-sscce#readme",
   "devDependencies": {
     "elm": "^0.19.1-5",
-    "elm-live": "^4.0.0-rc.1"
+    "elm-live": "^4.0.2"
   }
 }
